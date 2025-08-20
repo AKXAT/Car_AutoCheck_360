@@ -48,21 +48,21 @@ function TeslaModel3({
 
   return (
     <group ref={meshRef}>
-      {/* Main car body - realistic sedan shape with curves */}
+      {/* Main car body - lower profile sedan shape */}
       <mesh position={[0, 0, 0]} castShadow receiveShadow>
-        <boxGeometry args={[3.6, 1.2, 4.6]} />
+        <boxGeometry args={[3.6, 1.0, 4.6]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} clearcoat={1} clearcoatRoughness={0.05} />
       </mesh>
 
-      {/* Hood - curved and aerodynamic */}
-      <mesh position={[0, 0.1, 1.8]} rotation={[0.1, 0, 0]} castShadow>
-        <boxGeometry args={[3.4, 0.3, 1.4]} />
+      {/* Roof - connected to main body, proper Tesla Model 3 profile */}
+      <mesh position={[0, 0.45, 0]} castShadow>
+        <boxGeometry args={[3.4, 0.3, 4.2]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} clearcoat={1} />
       </mesh>
 
-      {/* Roof - sleek curved dome */}
-      <mesh position={[0, 0.7, 0]} castShadow>
-        <boxGeometry args={[3.2, 0.4, 3.8]} />
+      {/* Glass roof panel - Tesla signature panoramic roof */}
+      <mesh position={[0, 0.61, -0.5]} castShadow>
+        <boxGeometry args={[3.2, 0.02, 2.5]} />
         <meshPhysicalMaterial
           color="#87ceeb"
           metalness={0.1}
@@ -73,9 +73,21 @@ function TeslaModel3({
         />
       </mesh>
 
-      {/* Windshield - curved glass */}
-      <mesh position={[0, 0.8, 1.2]} rotation={[0.3, 0, 0]} castShadow>
-        <boxGeometry args={[3.0, 0.05, 1.2]} />
+      {/* Hood - properly connected to main body */}
+      <mesh position={[0, 0.05, 1.8]} rotation={[0.05, 0, 0]} castShadow>
+        <boxGeometry args={[3.4, 0.2, 1.4]} />
+        <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} clearcoat={1} />
+      </mesh>
+
+      {/* Trunk - connected rear section */}
+      <mesh position={[0, 0.05, -2.0]} rotation={[-0.03, 0, 0]} castShadow>
+        <boxGeometry args={[3.4, 0.4, 1.2]} />
+        <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
+      </mesh>
+
+      {/* Windshield - properly angled and connected */}
+      <mesh position={[0, 0.5, 1.2]} rotation={[0.2, 0, 0]} castShadow>
+        <boxGeometry args={[3.2, 0.02, 1.2]} />
         <meshPhysicalMaterial
           color="#87ceeb"
           metalness={0.1}
@@ -86,9 +98,9 @@ function TeslaModel3({
         />
       </mesh>
 
-      {/* Rear windshield - curved */}
-      <mesh position={[0, 0.7, -1.4]} rotation={[-0.2, 0, 0]} castShadow>
-        <boxGeometry args={[3.0, 0.05, 1.0]} />
+      {/* Rear windshield - connected to roof */}
+      <mesh position={[0, 0.5, -1.4]} rotation={[-0.15, 0, 0]} castShadow>
+        <boxGeometry args={[3.2, 0.02, 1.0]} />
         <meshPhysicalMaterial
           color="#87ceeb"
           metalness={0.1}
@@ -99,114 +111,152 @@ function TeslaModel3({
         />
       </mesh>
 
-      {/* Trunk - curved rear section */}
-      <mesh position={[0, 0.05, -2.0]} rotation={[-0.05, 0, 0]} castShadow>
-        <boxGeometry args={[3.4, 0.6, 1.2]} />
+      {/* Side windows - connected to roof structure */}
+      <mesh position={[-1.7, 0.4, 0.2]} rotation={[0, 0, 0.1]} castShadow>
+        <boxGeometry args={[0.02, 0.6, 2.5]} />
+        <meshPhysicalMaterial
+          color="#87ceeb"
+          metalness={0.1}
+          roughness={0.01}
+          transmission={0.95}
+          transparent={true}
+          opacity={0.2}
+        />
+      </mesh>
+      <mesh position={[1.7, 0.4, 0.2]} rotation={[0, 0, -0.1]} castShadow>
+        <boxGeometry args={[0.02, 0.6, 2.5]} />
+        <meshPhysicalMaterial
+          color="#87ceeb"
+          metalness={0.1}
+          roughness={0.01}
+          transmission={0.95}
+          transparent={true}
+          opacity={0.2}
+        />
+      </mesh>
+
+      {/* Front bumper - integrated with body */}
+      <mesh position={[0, -0.25, 2.4]} castShadow>
+        <boxGeometry args={[3.2, 0.3, 0.4]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
       </mesh>
 
-      {/* Front bumper - curved and aerodynamic */}
-      <mesh position={[0, -0.3, 2.5]} castShadow>
-        <boxGeometry args={[3.2, 0.4, 0.6]} />
+      {/* Rear bumper - integrated design */}
+      <mesh position={[0, -0.25, -2.4]} castShadow>
+        <boxGeometry args={[3.2, 0.3, 0.4]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
       </mesh>
 
-      {/* Rear bumper - curved */}
-      <mesh position={[0, -0.3, -2.5]} castShadow>
-        <boxGeometry args={[3.2, 0.4, 0.6]} />
+      {/* Door frames - connected to main structure */}
+      <mesh position={[-1.8, 0.2, 0.5]} castShadow>
+        <boxGeometry args={[0.1, 0.8, 1.8]} />
+        <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
+      </mesh>
+      <mesh position={[1.8, 0.2, 0.5]} castShadow>
+        <boxGeometry args={[0.1, 0.8, 1.8]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
       </mesh>
 
-      {/* Side body panels - curved fenders */}
-      <mesh position={[-1.9, 0.1, 0.5]} castShadow>
-        <boxGeometry args={[0.2, 1.0, 2.0]} />
-        <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
+      {/* A-pillars - structural connection between roof and body */}
+      <mesh position={[-1.4, 0.4, 1.0]} rotation={[0, 0, 0.1]} castShadow>
+        <boxGeometry args={[0.1, 0.6, 0.1]} />
+        <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
       </mesh>
-      <mesh position={[1.9, 0.1, 0.5]} castShadow>
-        <boxGeometry args={[0.2, 1.0, 2.0]} />
-        <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
+      <mesh position={[1.4, 0.4, 1.0]} rotation={[0, 0, -0.1]} castShadow>
+        <boxGeometry args={[0.1, 0.6, 0.1]} />
+        <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
       </mesh>
 
-      {/* Headlights - sleek curved design */}
-      <mesh position={[-1.4, 0.2, 2.4]} rotation={[0, -0.1, 0]} castShadow>
-        <boxGeometry args={[0.8, 0.3, 0.2]} />
-        <meshPhysicalMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.5} />
+      {/* B-pillars - rear structural support */}
+      <mesh position={[-1.4, 0.4, -0.5]} rotation={[0, 0, 0.05]} castShadow>
+        <boxGeometry args={[0.1, 0.6, 0.1]} />
+        <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
       </mesh>
-      <mesh position={[1.4, 0.2, 2.4]} rotation={[0, 0.1, 0]} castShadow>
-        <boxGeometry args={[0.8, 0.3, 0.2]} />
-        <meshPhysicalMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.5} />
+      <mesh position={[1.4, 0.4, -0.5]} rotation={[0, 0, -0.05]} castShadow>
+        <boxGeometry args={[0.1, 0.6, 0.1]} />
+        <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
+      </mesh>
+
+      {/* Headlights - integrated into front design */}
+      <mesh position={[-1.2, 0.1, 2.25]} rotation={[0, -0.1, 0]} castShadow>
+        <boxGeometry args={[0.6, 0.25, 0.15]} />
+        <meshPhysicalMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
+      </mesh>
+      <mesh position={[1.2, 0.1, 2.25]} rotation={[0, 0.1, 0]} castShadow>
+        <boxGeometry args={[0.6, 0.25, 0.15]} />
+        <meshPhysicalMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={0.3} />
       </mesh>
 
       {/* Taillights - Tesla signature design */}
-      <mesh position={[-1.4, 0.3, -2.4]} castShadow>
-        <boxGeometry args={[0.6, 0.2, 0.15]} />
-        <meshPhysicalMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={0.6} />
+      <mesh position={[-1.2, 0.2, -2.25]} castShadow>
+        <boxGeometry args={[0.5, 0.15, 0.1]} />
+        <meshPhysicalMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={0.4} />
       </mesh>
-      <mesh position={[1.4, 0.3, -2.4]} castShadow>
-        <boxGeometry args={[0.6, 0.2, 0.15]} />
-        <meshPhysicalMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={0.6} />
+      <mesh position={[1.2, 0.2, -2.25]} castShadow>
+        <boxGeometry args={[0.5, 0.15, 0.1]} />
+        <meshPhysicalMaterial color="#ff0000" emissive="#ff0000" emissiveIntensity={0.4} />
       </mesh>
 
-      {/* Side mirrors - aerodynamic design */}
-      <mesh position={[-2.0, 0.6, 0.8]} rotation={[0, -0.3, 0]} castShadow>
-        <boxGeometry args={[0.15, 0.1, 0.25]} />
+      {/* Side mirrors - properly positioned */}
+      <mesh position={[-1.9, 0.5, 0.8]} rotation={[0, -0.2, 0]} castShadow>
+        <boxGeometry args={[0.12, 0.08, 0.2]} />
         <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
       </mesh>
-      <mesh position={[2.0, 0.6, 0.8]} rotation={[0, 0.3, 0]} castShadow>
-        <boxGeometry args={[0.15, 0.1, 0.25]} />
+      <mesh position={[1.9, 0.5, 0.8]} rotation={[0, 0.2, 0]} castShadow>
+        <boxGeometry args={[0.12, 0.08, 0.2]} />
         <meshPhysicalMaterial color="#2a2a2a" metalness={0.8} roughness={0.2} />
       </mesh>
 
-      {/* Door handles - flush Tesla design */}
-      <mesh position={[-1.95, 0.2, 0.5]} castShadow>
-        <boxGeometry args={[0.05, 0.08, 0.3]} />
+      {/* Door handles - Tesla flush design */}
+      <mesh position={[-1.85, 0.15, 0.5]} castShadow>
+        <boxGeometry args={[0.03, 0.06, 0.25]} />
         <meshPhysicalMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
       </mesh>
-      <mesh position={[1.95, 0.2, 0.5]} castShadow>
-        <boxGeometry args={[0.05, 0.08, 0.3]} />
+      <mesh position={[1.85, 0.15, 0.5]} castShadow>
+        <boxGeometry args={[0.03, 0.06, 0.25]} />
         <meshPhysicalMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
       </mesh>
 
-      {/* Wheels - realistic Tesla Aero design with proper curves */}
+      {/* Wheels - realistic Tesla Aero design */}
       {[
-        [-1.6, -0.5, 1.4],
-        [1.6, -0.5, 1.4],
-        [-1.6, -0.5, -1.4],
-        [1.6, -0.5, -1.4],
+        [-1.5, -0.4, 1.3],
+        [1.5, -0.4, 1.3],
+        [-1.5, -0.4, -1.3],
+        [1.5, -0.4, -1.3],
       ].map((position, index) => (
         <group key={index} position={position as [number, number, number]}>
-          {/* Tire - realistic torus shape */}
+          {/* Tire */}
           <mesh castShadow rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.35, 0.35, 0.25, 32]} />
+            <cylinderGeometry args={[0.32, 0.32, 0.22, 32]} />
             <meshPhysicalMaterial color="#1a1a1a" roughness={0.9} />
           </mesh>
-          {/* Rim - curved spokes */}
+          {/* Rim */}
           <mesh rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.28, 0.28, 0.27, 32]} />
+            <cylinderGeometry args={[0.26, 0.26, 0.24, 32]} />
             <meshPhysicalMaterial color="#e5e7eb" metalness={0.9} roughness={0.1} />
           </mesh>
-          {/* Aero wheel covers */}
+          {/* Aero cover */}
           <mesh rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.3, 0.3, 0.02, 32]} />
+            <cylinderGeometry args={[0.28, 0.28, 0.01, 32]} />
             <meshPhysicalMaterial color="#f3f4f6" metalness={0.7} roughness={0.3} />
           </mesh>
           {/* Tesla center cap */}
           <mesh rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.06, 0.06, 0.28, 16]} />
+            <cylinderGeometry args={[0.05, 0.05, 0.25, 16]} />
             <meshPhysicalMaterial color="#dc2626" metalness={0.8} roughness={0.2} />
           </mesh>
         </group>
       ))}
 
-      {/* Tesla Model 3 front grille area - minimalist design */}
-      <mesh position={[0, -0.1, 2.6]} castShadow>
-        <boxGeometry args={[2.8, 0.6, 0.1]} />
+      {/* Tesla front grille area */}
+      <mesh position={[0, -0.05, 2.5]} castShadow>
+        <boxGeometry args={[2.6, 0.4, 0.05]} />
         <meshPhysicalMaterial color="#ffffff" metalness={0.9} roughness={0.1} />
       </mesh>
 
       {/* Tesla logo area */}
-      <mesh position={[0, 0.1, 2.65]} castShadow>
-        <boxGeometry args={[0.3, 0.1, 0.05]} />
+      <mesh position={[0, 0.05, 2.55]} castShadow>
+        <boxGeometry args={[0.25, 0.08, 0.02]} />
         <meshPhysicalMaterial color="#dc2626" metalness={0.8} roughness={0.2} />
       </mesh>
 
@@ -223,12 +273,12 @@ function TeslaModel3({
               onClick={() => onPartClick(partId)}
               scale={isHighlighted ? 1.5 : 1}
             >
-              <sphereGeometry args={[0.1, 16, 16]} />
+              <sphereGeometry args={[0.08, 16, 16]} />
               <meshBasicMaterial color={statusColor} transparent opacity={isHighlighted ? 1 : 0.7} />
             </mesh>
 
             <mesh scale={isHighlighted ? 2 : 1.2}>
-              <ringGeometry args={[0.12, 0.15, 16]} />
+              <ringGeometry args={[0.1, 0.12, 16]} />
               <meshBasicMaterial color={statusColor} transparent opacity={0.3} side={THREE.DoubleSide} />
             </mesh>
 
